@@ -15,9 +15,6 @@ import java.util.Collections;
 
 public class MainActivity extends ActionBarActivity {
 
-    private boolean firstTime = true;
-    private boolean isChronometerRunning = false;
-    private long timeWhenStopped = 0;
     private ArrayList<Player> squad;
 
     @Override
@@ -54,22 +51,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
-        Chronometer chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometer.stop();
+        Stopwatch stopwatch = (Stopwatch) findViewById(R.id.stopwatch);
+        stopwatch.onPause();
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
-        if (isChronometerRunning)
-        {
-            Chronometer chronometer = (Chronometer) findViewById(R.id.chronometer);
-            chronometer.start();
-        }
+        Stopwatch stopwatch = (Stopwatch) findViewById(R.id.stopwatch);
+        stopwatch.onResume();
     }
 
     @Override
@@ -94,8 +86,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private ArrayList<Player> AssembleSquad()
-    {
+    private ArrayList<Player> AssembleSquad() {
         ArrayList<Player> ret = new ArrayList<Player>();
         ret.add(new Player("Andrew"));
         ret.add(new Player("Brady"));
@@ -105,34 +96,5 @@ public class MainActivity extends ActionBarActivity {
         ret.add(new Player("Kaiden"));
         ret.add(new Player("Shannon"));
         return ret;
-    }
-
-    public void startStop(View view) {
-        Chronometer chronometer = (Chronometer) view;
-        if (firstTime) {
-            chronometer.setBase(SystemClock.elapsedRealtime());
-            firstTime = false;
-            timeWhenStopped = 0;
-        }
-        if (isChronometerRunning)
-        {
-            chronometer.stop();
-            timeWhenStopped = chronometer.getBase() - SystemClock.elapsedRealtime();
-            isChronometerRunning = false;
-        }
-        else {
-            chronometer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
-            chronometer.start();
-            isChronometerRunning = true;
-        }
-    }
-
-    public void reset(View view) {
-        Chronometer chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        if (!isChronometerRunning)
-        {
-            firstTime = true;
-        }
     }
 }
