@@ -6,26 +6,51 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Chronometer;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends ActionBarActivity {
 
-    boolean firstTime = true;
-    boolean isChronometerRunning = false;
+    private boolean firstTime = true;
+    private boolean isChronometerRunning = false;
     private long timeWhenStopped = 0;
-    String[] squad = { "Andrew", "Brady", "Cooper", "Josh", "Julian", "Kaiden", "Shannon" };
+    private ArrayList<Player> squad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        squad = AssembleSquad();
+
         ListView playerListView = (ListView) findViewById(R.id.listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, squad);
+        final PlayerArrayAdapter adapter;
+        adapter = new PlayerArrayAdapter(this, R.layout.player_row, squad);
         playerListView.setAdapter(adapter);
+        playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                if (!squad.get(position).isAvailable()) return;
+                squad.add(squad.remove(position));
+                Collections.sort(squad);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        playerListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
+                Player player = squad.get(position);
+                player.setAvailability(!player.isAvailable());
+                if (!player.isAvailable()) squad.add(squad.remove(position));
+                Collections.sort(squad);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -67,6 +92,19 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private ArrayList<Player> AssembleSquad()
+    {
+        ArrayList<Player> ret = new ArrayList<Player>();
+        ret.add(new Player("Andrew"));
+        ret.add(new Player("Brady"));
+        ret.add(new Player("Cooper"));
+        ret.add(new Player("Josh"));
+        ret.add(new Player("Julian"));
+        ret.add(new Player("Kaiden"));
+        ret.add(new Player("Shannon","",false));
+        return ret;
     }
 
     public void startStop(View view) {
