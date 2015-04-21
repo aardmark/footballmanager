@@ -1,17 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/playerName"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/abc_text_size_display_3_material"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/playerName" />
-
-</LinearLayout>
-
-
+    android:layout_height="@dimen/abc_text_size_display_3_material"
+    android:text="Large Text"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
 

@@ -103,7 +103,7 @@ public class MainActivity extends ActionBarActivity {
         ret.add(new Player("Josh"));
         ret.add(new Player("Julian"));
         ret.add(new Player("Kaiden"));
-        ret.add(new Player("Shannon","",false));
+        ret.add(new Player("Shannon"));
         return ret;
     }
 
