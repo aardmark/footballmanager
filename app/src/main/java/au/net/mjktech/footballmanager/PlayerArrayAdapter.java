@@ -43,4 +43,8 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> {
 
         return rowView;
     }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 }

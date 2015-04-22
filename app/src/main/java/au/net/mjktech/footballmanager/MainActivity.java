@@ -14,18 +14,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class MainActivity extends ActionBarActivity {
-
-    private ArrayList<Player> squad;
+    static final String SQUAD = "squad";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        squad = AssembleSquad();
-
-        ListView playerListView = (ListView) findViewById(R.id.listView);
+        final ArrayList<Player> squad;
         final PlayerArrayAdapter adapter;
+        ListView playerListView = (ListView) findViewById(R.id.listView);
+
+        if (savedInstanceState == null) {
+            squad = AssembleSquad();
+        }
+        else {
+            Stopwatch stopwatch = (Stopwatch) findViewById(R.id.stopwatch);
+            squad = savedInstanceState.getParcelableArrayList(SQUAD);
+        }
+
         adapter = new PlayerArrayAdapter(this, R.layout.player_row, squad);
         playerListView.setAdapter(adapter);
         playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,6 +69,14 @@ public class MainActivity extends ActionBarActivity {
         super.onResume();
         Stopwatch stopwatch = (Stopwatch) findViewById(R.id.stopwatch);
         stopwatch.onResume();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        ListView playerListView = (ListView) findViewById(R.id.listView);
+        ArrayList<Player> squad = ((PlayerArrayAdapter)playerListView.getAdapter()).getPlayers();
+        savedInstanceState.putParcelableArrayList(SQUAD, squad);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

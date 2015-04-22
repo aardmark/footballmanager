@@ -17,16 +17,6 @@
             android:textSize="40sp"
             android:layout_weight="1"
             android:layout_marginRight="40dp" />
-        <!--
-        <Chronometer
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:id="@+id/chronometer"
-            android:clickable="true"
-            android:onClick="startStop"
-            android:textSize="40sp"
-            android:layout_weight="1"
-            android:layout_marginRight="40dp" /> -->
 
     </LinearLayout>
 
