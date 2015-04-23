@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Chronometer;
@@ -78,34 +79,28 @@ public class Stopwatch extends Chronometer implements View.OnClickListener, View
 
     @Override
     public Parcelable onSaveInstanceState() {
-        //begin boilerplate code that allows parent classes to save state
         Parcelable superState = super.onSaveInstanceState();
+        SavedState savedState = new SavedState(superState);
 
-        SavedState ss = new SavedState(superState);
-        //end
+        savedState.base = this.getBase();
+        savedState.timeWhenStopped = this.timeWhenStopped;
+        savedState.started = this.isStarted;
 
-        ss.base = this.getBase();
-        ss.timeWhenStopped = this.timeWhenStopped;
-        ss.started = this.isStarted;
-
-        return ss;
+        return savedState;
     }
 
     @Override
     public void onRestoreInstanceState(Parcelable state) {
-        //begin boilerplate code so parent classes can restore state
         if (!(state instanceof SavedState)) {
             super.onRestoreInstanceState(state);
             return;
         }
+        SavedState savedState = (SavedState) state;
+        super.onRestoreInstanceState(savedState.getSuperState());
 
-        SavedState ss = (SavedState) state;
-        super.onRestoreInstanceState(ss.getSuperState());
-        //end
-
-        this.setBase(ss.base);
-        this.timeWhenStopped = ss.timeWhenStopped;
-        this.isStarted = ss.started;
+        this.setBase(savedState.base);
+        this.timeWhenStopped = savedState.timeWhenStopped;
+        this.isStarted = savedState.started;
         if (!this.isStarted) this.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
     }
 
@@ -126,14 +121,13 @@ public class Stopwatch extends Chronometer implements View.OnClickListener, View
         }
 
         @Override
-        public void writeToParcel(Parcel out, int flags) {
+        public void writeToParcel(@NonNull Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeLong(this.base);
             out.writeLong(this.timeWhenStopped);
             out.writeInt(this.started ? 1 : 0);
         }
 
-        //required field that makes Parcelables from a Parcel
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<SavedState>() {
                     public SavedState createFromParcel(Parcel in) {

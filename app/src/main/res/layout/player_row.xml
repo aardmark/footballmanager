@@ -1,7 +1,8 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/playerName"
-    android:layout_width="fill_parent"
-    android:layout_height="@dimen/abc_text_size_display_3_material"
-    android:text="Large Text"
-    android:textAppearance="?android:attr/textAppearanceLarge" />
-
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center_horizontal"
+    android:textSize="40sp"
+    android:textColor="#ff000000"
+    android:textStyle="bold" />

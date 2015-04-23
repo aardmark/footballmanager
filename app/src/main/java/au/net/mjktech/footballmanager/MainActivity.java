@@ -1,15 +1,12 @@
 package au.net.mjktech.footballmanager;
 
-import android.os.SystemClock;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Chronometer;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,7 +26,6 @@ public class MainActivity extends ActionBarActivity {
             squad = AssembleSquad();
         }
         else {
-            Stopwatch stopwatch = (Stopwatch) findViewById(R.id.stopwatch);
             squad = savedInstanceState.getParcelableArrayList(SQUAD);
         }
 
@@ -102,7 +98,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private ArrayList<Player> AssembleSquad() {
-        ArrayList<Player> ret = new ArrayList<Player>();
+        ArrayList<Player> ret = new ArrayList<>();
         ret.add(new Player("Andrew"));
         ret.add(new Player("Brady"));
         ret.add(new Player("Cooper"));

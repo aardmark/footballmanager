@@ -2,6 +2,7 @@ package au.net.mjktech.footballmanager;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 public class Player implements Comparable<Player>, Parcelable {
     private String firstName;
@@ -58,7 +59,7 @@ public class Player implements Comparable<Player>, Parcelable {
     }
 
     @Override
-    public int compareTo(Player that) {
+    public int compareTo(@NonNull Player that) {
         if (this.isAvailable() && that.isAvailable()) {
             return 0;
         }
@@ -84,6 +85,7 @@ public class Player implements Comparable<Player>, Parcelable {
         public Player createFromParcel(Parcel parcel) {
             return new Player(parcel);
         }
+
         public Player[] newArray(int size) {
             return new Player[size];
         }

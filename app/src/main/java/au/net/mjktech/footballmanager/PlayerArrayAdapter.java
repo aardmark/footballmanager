@@ -24,6 +24,7 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Player player = players.get(position);
         View rowView = convertView;
+
         if (rowView == null)
         {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -34,13 +35,12 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> {
         playerNameView.setText(player.getFirstName());
         if ((position < 4) && player.isAvailable())
         {
-            playerNameView.setBackgroundColor(Color.GREEN);
+            playerNameView.setBackgroundResource(R.drawable.player_playing_bg);
         }
         else
         {
-            playerNameView.setBackgroundColor(player.isAvailable() ? Color.YELLOW : Color.RED);
+            playerNameView.setBackgroundResource(player.isAvailable() ? R.drawable.player_waiting_bg : R.drawable.player_unavailable_bg);
         }
-
         return rowView;
     }
 
