@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class MainActivity extends ActionBarActivity {
                 return true;
             }
         });
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
