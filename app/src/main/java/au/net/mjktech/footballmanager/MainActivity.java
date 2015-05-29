@@ -58,15 +58,15 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Stopwatch stopwatch = (Stopwatch) findViewById(R.id.stopwatch);
-        stopwatch.onPause();
+        ((Stopwatch) findViewById(R.id.stopwatch)).onPause();
+        ((Stopwatch) findViewById(R.id.matchTimer)).onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Stopwatch stopwatch = (Stopwatch) findViewById(R.id.stopwatch);
-        stopwatch.onResume();
+        ((Stopwatch) findViewById(R.id.stopwatch)).onResume();
+        ((Stopwatch) findViewById(R.id.matchTimer)).onResume();
     }
 
     @Override

@@ -10,12 +10,24 @@
         android:orientation="horizontal">
 
         <au.net.mjktech.footballmanager.Stopwatch
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:id="@+id/stopwatch"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
             android:textSize="40sp"
-            android:layout_weight="1"
-            android:layout_marginRight="40dp" />
+            android:layout_weight="2"
+            android:id="@+id/status" />
+
+        <au.net.mjktech.footballmanager.Stopwatch
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/matchTimer"
+            android:textSize="40sp" />
 
     </LinearLayout>
 
