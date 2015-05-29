@@ -13,6 +13,7 @@ import java.util.Collections;
 
 public class MainActivity extends ActionBarActivity {
     static final String SQUAD = "squad";
+    static final boolean resetOnSub = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
                 squad.add(squad.remove(position));
                 Collections.sort(squad);
                 adapter.notifyDataSetChanged();
+                if (resetOnSub) ((Stopwatch) findViewById(R.id.stopwatch)).reset();
             }
         });
         playerListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
