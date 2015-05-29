@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Preferences">
+
+        <CheckBoxPreference
+            android:key="reset_on_substitution_preference"
+            android:title="Reset On Substitution"
+            android:summary="Resets the stopwatch when a player is substituted"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

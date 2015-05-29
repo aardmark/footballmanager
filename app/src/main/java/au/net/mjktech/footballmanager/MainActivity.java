@@ -1,6 +1,9 @@
 package au.net.mjktech.footballmanager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,17 +11,23 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class MainActivity extends ActionBarActivity {
     static final String SQUAD = "squad";
-    static final boolean resetOnSub = true;
+    static boolean resetOnSubstitution = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        resetOnSubstitution = sharedPref.getBoolean("reset_on_substitution_preference", true);
 
         final ArrayList<Player> squad;
         final PlayerArrayAdapter adapter;
@@ -40,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
                 squad.add(squad.remove(position));
                 Collections.sort(squad);
                 adapter.notifyDataSetChanged();
-                if (resetOnSub) ((Stopwatch) findViewById(R.id.stopwatch)).reset();
+                if (resetOnSubstitution) ((Stopwatch) findViewById(R.id.stopwatch)).reset();
             }
         });
         playerListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -55,6 +64,12 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        CharSequence text = resetOnSubstitution ? "Resetting on subs" : "Not Resetting on subs";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(this, text, duration);
+        toast.show();
     }
 
     @Override
@@ -99,6 +114,17 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showPreferences(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent i = new Intent(this, SettingsActivity.class);
+                startActivity(i);
+                return;
+            default:
+                return;
+        }
     }
 
     private ArrayList<Player> AssembleSquad() {
