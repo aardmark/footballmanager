@@ -33,7 +33,7 @@ public class PlayerArrayAdapter extends ArrayAdapter<Player> {
 
         TextView playerNameView = (TextView)rowView;
         playerNameView.setText(player.getFirstName());
-        if ((position < 4) && player.isAvailable())
+        if ((position < 6) && player.isAvailable())
         {
             playerNameView.setBackgroundResource(R.drawable.player_playing_bg);
         }

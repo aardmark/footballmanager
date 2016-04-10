@@ -132,10 +132,14 @@ public class MainActivity extends ActionBarActivity {
         ret.add(new Player("Andrew"));
         ret.add(new Player("Brady"));
         ret.add(new Player("Cooper"));
+        ret.add(new Player("Doyle"));
+        ret.add(new Player("Jai"));
         ret.add(new Player("Josh"));
         ret.add(new Player("Julian"));
-        ret.add(new Player("Kaiden"));
+        ret.add(new Player("Michael"));
+        ret.add(new Player("Mitchell"));
         ret.add(new Player("Shannon"));
+        ret.add(new Player("Snoopy"));
         return ret;
     }
 }
