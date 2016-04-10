@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -64,7 +65,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
+        ((Stopwatch) findViewById(R.id.stopwatch)).setStatus((TextView) findViewById(R.id.statusLeft));
+        ((Stopwatch) findViewById(R.id.matchTimer)).setStatus((TextView) findViewById(R.id.statusRight));
         CharSequence text = resetOnSubstitution ? "Resetting on subs" : "Not Resetting on subs";
         int duration = Toast.LENGTH_SHORT;
 

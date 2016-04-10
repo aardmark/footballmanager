@@ -2,4 +2,6 @@
     <string name="app_name">Football Manager</string>
     <string name="action_settings">Settings</string>
     <string name="reset_button_text">RESET</string>
+    <string name="TimerRunning">Running</string>
+    <string name="TimerPaused">Paused</string>
 </resources>

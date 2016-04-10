@@ -1,6 +1,7 @@
 package au.net.mjktech.footballmanager;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
@@ -8,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 public class Stopwatch extends Chronometer implements View.OnClickListener, View.OnLongClickListener {
 
@@ -34,12 +36,20 @@ public class Stopwatch extends Chronometer implements View.OnClickListener, View
         setOnLongClickListener(this);
     }
 
+    private TextView status;
+    public void setStatus(TextView status)
+    {
+        this.status = status;
+    }
+
     @Override
     public void onClick(View view) {
-        if (isStarted)
+        if (isStarted) {
             stop();
-        else
+        }
+        else {
             start();
+        }
     }
 
     @Override
@@ -53,6 +63,8 @@ public class Stopwatch extends Chronometer implements View.OnClickListener, View
         setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
         isStarted = true;
         super.start();
+        this.status.setText(R.string.TimerRunning);
+        this.status.setTextColor(Color.BLUE);
     }
 
     @Override
@@ -60,6 +72,8 @@ public class Stopwatch extends Chronometer implements View.OnClickListener, View
         timeWhenStopped = getBase() - SystemClock.elapsedRealtime();
         isStarted = false;
         super.stop();
+        this.status.setText(R.string.TimerPaused);
+        this.status.setTextColor(Color.RED);
     }
 
     public void reset() {
